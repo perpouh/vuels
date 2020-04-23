@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <router-link to="/about">文字がなかった</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
