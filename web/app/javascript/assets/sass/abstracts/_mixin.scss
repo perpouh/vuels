@@ -1,0 +1,103 @@
+@mixin default-input() {
+  height: 25px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: 0 8px;
+  color: #444;
+  box-sizing: border-box;
+  &:focus {
+    outline: 1px solid orange;
+  }
+}
+
+@mixin pc($width: 769px) {
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}
+@mixin sp($width: 768px) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+// ズルい線
+@mixin line-top($op1: 0.2, $op2: 0.3) {
+  border-top: 1px solid rgba(0, 0, 0, $op1);
+  @include box-shadow(rgba(255, 255, 255, $op2) 0 1px 0 inset);
+}
+@mixin line-left($op1: 0.2, $op2: 0.3) {
+  border-left: 1px solid rgba(0, 0, 0, $op1);
+  @include box-shadow(rgba(255, 255, 255, $op2) -1px 0 0);
+}
+@mixin line-right($op1: 0.2, $op2: 0.3) {
+  border-right: 1px solid rgba(0, 0, 0, $op1);
+  @include box-shadow(rgba(255, 255, 255, $op2) -1px 0 0 inset);
+}
+@mixin line-bottom($op1: 0.2, $op2: 0.3) {
+  border-bottom: 1px solid rgba(0, 0, 0, $op1);
+  @include box-shadow(rgba(255, 255, 255, $op2) 0 1px 0);
+}
+
+// ズルいテキストシャドウ
+@mixin ts-000($op: 0.4) {
+  text-shadow: 1px -1px rgba(0, 0, 0, $op);
+}
+@mixin ts-fff($op: 0.7) {
+  text-shadow: -1px 1px rgba(0, 0, 0, $op);
+}
+
+// ズルいグラデーション
+@mixin gradient-top-lighten($color: #666, $lighten: 10%) {
+  background-color: $color;
+  @include filter-gradient(lighten($color, $lighten), $color, vertical);
+  @include background-image(linear-gradient(lighten($color, $lighten) 0%, $color 100%));
+}
+@mixin gradient-top-darken($color: #666, $darken: 10%) {
+  background-color: $color;
+  @include filter-gradient(darken($color, $darkten), $color, vertical);
+  @include background-image(linear-gradient(darken($color, $darken) 0%, $color 100%));
+}
+
+// ズルいエンボス　エンボスis何？
+@mixin box-deboss($border: 0.1, $shadow: 0.1, $highlight: 1) {
+  border: 1px solid rgba(0, 0, 0, $border);
+  @include box-shadow(rgba(0, 0, 0, $shadow) -1px 1px 2px inset, rgba(255, 255, 255, $highlight) -1px 1px 0);
+}
+@mixin box-emboss($border: 0.15, $shadow: 0.05, $highlight: 1) {
+  border: 1px solid rgba(0, 0, 0, $border);
+  @include box-shadow(rgba(0, 0, 0, $shadow) -1px 1px 0px, rgba(255, 255, 255, $highlight) -1px 1px 0 inset);
+}
+
+// 色指定ボタン
+@mixin button($button_color: #ffffff, $fontColor: #ffffff) {
+  // @include gradient-top-lighten($button_color);
+  background-color: $button_color;
+  @include border-radius(4px);
+  @include box-emboss(0.2, 0.1, 0.3);
+  color: $fontColor;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  line-height: 1em;
+  &:hover {
+    // @include gradient-top-lighten($button_color, 15%);
+    text-decoration: none;
+    color: $fontColor;
+  }
+}
+
+@mixin link-text() {
+  &,
+  &:hover,
+  &:visited,
+  &:active {
+    color: white;
+    text-decoration: none;
+  }
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
+}
