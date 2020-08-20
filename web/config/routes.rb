@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   constraints subdomain: '' do
     get '/', to: "pages#index"
   end
